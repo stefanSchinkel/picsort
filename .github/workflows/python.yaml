@@ -21,5 +21,9 @@ jobs:
         run: pip install poetry
       - name: Install deps
         run: poetry install --with dev --no-root
-      - name: run tests
-        run: poetry run pytest tests
+      - name: install just
+        run: |
+          apt-get update
+          apt-get install -y just
+      - name: run tests w/ coverage
+        run: just cover

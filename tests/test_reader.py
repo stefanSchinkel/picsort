@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from picsort.picsort import ExifReader, ExifNotFoundError, FileNotFoundError
+from picsort.picsort import ExifReader, FileNotFoundError
 
 
 def test_init_fail():
@@ -16,7 +16,18 @@ def test_init_fail():
 
     # Assert
     with pytest.raises(FileNotFoundError):
-        er = ExifReader(fname)
+        ExifReader(fname)
+
+
+def test_no_image():
+    """make sure we raise if file is not an image"""
+    # Arrange
+    fname = Path("./tests/test_basic.py")
+    # Act
+
+    # Assert
+    with pytest.raises(FileNotFoundError):
+        ExifReader(fname)
 
 
 def test_exif_fail():
@@ -28,5 +39,18 @@ def test_exif_fail():
     er = ExifReader(fname)
 
     # Assert
-    with pytest.raises(ExifNotFoundError):
-        er.proc()
+    assert er.proc() is False
+
+
+def test_parse_success():
+    """Make sure all is filled correctly"""
+    # Arrange
+    fname = Path("./tests/pillow.png")
+    expected = "2024/12/2024-12-21 12-51-08"
+
+    # Act
+    er = ExifReader(fname)
+
+    # Assert
+    assert er.proc() is True
+    assert str(er.tgt).startswith(expected)
