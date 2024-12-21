@@ -7,12 +7,15 @@ license = "Beerware"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 pillow = "^11.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
+pre-commit = "^4.0.1"
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
 
 [tool.poetry.scripts]
 picsort = "picsort.__main__:main"
