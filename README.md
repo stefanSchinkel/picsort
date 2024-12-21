@@ -1,4 +1,4 @@
-![CI status](https://github.com/stefanSchinkel/picsort/actions/workflows/python.yml/badge.svg?branch=dev)
+[![CI](https://github.com/stefanSchinkel/picsort/actions/workflows/python.yaml/badge.svg?branch=dev)](https://github.com/stefanSchinkel/picsort/actions/workflows/python.yaml)
 ## picsort
 Neatly move images into folders
 
