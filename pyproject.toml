@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "picsort"
+version = "0.1.0"
+description = "Sort images into folders based on time stamps"
+authors = ["Stefan Schinkel <mail@dreeg.org>"]
+license = "Beerware"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pillow = "^11.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[tool.poetry.scripts]
+picsort = "picsort.__main__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
