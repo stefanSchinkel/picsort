@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       # You can test your matrix by printing the current Python version
+      - name: Install poetry
+        run: pip install poetry
       - name: Install deps
         run: poetry install --with dev
       - name: run tests
