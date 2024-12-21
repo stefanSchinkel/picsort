@@ -20,6 +20,6 @@ jobs:
       - name: Install poetry
         run: pip install poetry
       - name: Install deps
-        run: poetry install --with dev
+        run: poetry install --with dev --no-root
       - name: run tests
         run: poetry run pytest tests
