@@ -1,6 +1,9 @@
 """Tests for the exif reader
 """
+
 import logging
+import os
+import shutil
 from pathlib import Path
 
 import pytest
@@ -68,3 +71,39 @@ def test_log_on_no_exif(caplog, tmp_path):
     with caplog.at_level(logging.INFO):
         s.run()
         assert "has no exif data" in caplog.text
+
+
+def test_copy(tmp_path):
+    """check if move moves"""
+    # Arrange
+    src = Path("./tests/imgs/")
+    tgt = tmp_path / "out"
+    tgt.mkdir()
+    check_dir = tgt / "2024/11"
+    # Act
+    s = Sorter(src, tgt)
+    s.run()
+    files = os.listdir(check_dir)
+
+    # Assert
+    assert len(files) == 2
+    assert len(os.listdir(src)) == 5
+
+
+def test_move(tmp_path):
+    """just make sure none images get logged"""
+    # Arrange
+    src = tmp_path / "in"
+    src.mkdir()
+    tgt = tmp_path / "out"
+    tgt.mkdir()
+    shutil.copy("./tests/imgs/pillow.png", src)
+    shutil.copy("./tests/imgs/pillow_noexif.png", src)
+
+    # Act
+    s = Sorter(src, tgt, move=True)
+    s.run()
+
+    # Assert
+    assert len(os.listdir(tgt)) == 1  # one should move
+    assert len(os.listdir(src)) == 1  # and one should stay
