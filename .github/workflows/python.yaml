@@ -9,8 +9,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-
     steps:
+      - uses: extractions/setup-just@v2
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -21,9 +21,5 @@ jobs:
         run: pip install poetry
       - name: Install deps
         run: poetry install --with dev --no-root
-      - name: install just
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y just
       - name: run tests w/ coverage
         run: just cover
