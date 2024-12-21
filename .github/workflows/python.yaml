@@ -23,7 +23,7 @@ jobs:
         run: poetry install --with dev --no-root
       - name: install just
         run: |
-          apt-get update
-          apt-get install -y just
+          sudo apt-get update
+          sudo apt-get install -y just
       - name: run tests w/ coverage
         run: just cover
