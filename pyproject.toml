@@ -7,7 +7,7 @@ license = "Beerware"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 pillow = "^11.0.0"
 
 
