@@ -33,7 +33,7 @@ def test_no_image():
 def test_exif_fail():
     """raise error when no exif found"""
     # Arrange
-    fname = Path("./tests/pillow_noexif.png")
+    fname = Path("./tests/imgs/pillow_noexif.png")
 
     # Act
     er = ExifReader(fname)
@@ -45,7 +45,7 @@ def test_exif_fail():
 def test_parse_success():
     """Make sure all is filled correctly"""
     # Arrange
-    fname = Path("./tests/pillow.png")
+    fname = Path("./tests/imgs/pillow.png")
     expected = "2024/12/2024-12-21 12-51-08"
 
     # Act
