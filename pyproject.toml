@@ -13,6 +13,7 @@ pillow = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
+pre-commit = "^4.0.1"
 
 [tool.poetry.scripts]
 picsort = "picsort.__main__:main"
