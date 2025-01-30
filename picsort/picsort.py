@@ -1,6 +1,7 @@
 """picsort.py
 Move images to dedicated folders based on Exif info or filename
 """
+
 import logging
 from datetime import datetime as dt
 from os import getenv, rename
@@ -8,7 +9,7 @@ from pathlib import Path
 from shutil import copy
 from uuid import uuid1
 
-from PIL import Image, UnidentifiedImageError
+from PIL import ExifTags, Image, UnidentifiedImageError
 
 
 class FileNotFoundError(Exception):
@@ -84,7 +85,8 @@ class ExifReader:
     def __init__(self, src_file: Path) -> None:
         self.src_file = src_file
         self.ext = self.src_file.suffix
-        self.tgt: Path
+        self.tgt: Path = None
+        self.ts: str = ""
 
         try:
             self.pimg = Image.open(self.src_file)
@@ -100,10 +102,18 @@ class ExifReader:
 
         try:
             self.ts = self.exif[306]
-            self.dt = dt.strptime(self.ts, fmt)
         except KeyError:
+            ...
+
+        try:
+            self.ts = self.exif.get_ifd(ExifTags.Base.ExifOffset)[36867]
+        except KeyError:
+            ...
+
+        if not self.ts:
             return False
 
+        self.dt = dt.strptime(self.ts, fmt)
         p = self.dt.strftime("%Y/%m/")
         self.tgt = Path(f"{p}{self.dt.strftime(f_format)} {str(uuid1())[:4]}{self.ext}")
 
