@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "picsort"
-version = "0.1.0"
+version = "0.2.0"
 description = "Sort images into folders based on time stamps"
 authors = ["Stefan Schinkel <mail@dreeg.org>"]
 license = "Beerware"
