@@ -1,5 +1,5 @@
 """picsort.py
-Move images to dedicated folders based on Exif info or filename
+Move images to dedicated folders based on Exif
 """
 
 import logging
@@ -103,12 +103,10 @@ class ExifReader:
         try:
             self.ts = self.exif[306]
         except KeyError:
-            ...
-
-        try:
-            self.ts = self.exif.get_ifd(ExifTags.Base.ExifOffset)[36867]
-        except KeyError:
-            ...
+            try:
+                self.ts = self.exif.get_ifd(ExifTags.Base.ExifOffset)[36867]
+            except KeyError:
+                ...
 
         if not self.ts:
             return False
